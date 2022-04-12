@@ -4,6 +4,9 @@
 #include <HTTPClient.h>
 #include <Keypad.h>
 
+// Buzzer
+#define buzzer 13
+
 // Keypad
 const byte ROWS = 4;
 const byte COLS = 4;
@@ -98,6 +101,8 @@ void setup()
 {
     Serial.begin(115200);
 
+    pinMode(buzzer, OUTPUT);
+
     wifiMulti.addAP("AP1", "123456789");
     wifiMulti.addAP("AP2", "123456789");
     wifiMulti.addAP("AP3", "123456789");
@@ -138,6 +143,9 @@ void loop()
             WiFi.disconnect();
             ruangan = 0;
             Serial.println(ruangan);
+            digitalWrite(buzzer, HIGH);
+            delay(500);
+            digitalWrite(buzzer, LOW);
         }
     }
 }
